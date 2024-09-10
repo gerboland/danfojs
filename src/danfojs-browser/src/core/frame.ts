@@ -12,7 +12,7 @@
 * limitations under the License.
 * ==========================================================================
 */
-import BaseDataFrame from "../../../danfojs-base/core/frame"
+import BaseDataFrame from "../../../danfojs-base/core/frame";
 import { BaseDataOptionType } from "../../../danfojs-base/shared/types";
 
 /**
@@ -23,7 +23,7 @@ import { BaseDataOptionType } from "../../../danfojs-base/shared/types";
  * @param options.index Array of numeric or string names for subseting array. If not specified, indexes are auto generated.
  * @param options.columns Array of column names. If not specified, column names are auto generated.
  * @param options.dtypes Array of data types for each the column. If not specified, dtypes are/is inferred.
- * @param options.config General configuration object for extending or setting NDframe behavior.      
+ * @param options.config General configuration object for extending or setting NDframe behavior.
  */
 export default class DataFrame extends BaseDataFrame {
     [key: string]: any

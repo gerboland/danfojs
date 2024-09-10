@@ -13,16 +13,14 @@
 * ==========================================================================
 */
 
-import { BaseUserConfig, TableUserConfig, } from "table"
-import { Config, Layout } from "plotly.js-dist-min"
 import { HeadersInit } from "node-fetch";
-import Groupby from '../aggregators/groupby';
 import { ParseConfig } from 'papaparse';
+import { BaseUserConfig, TableUserConfig, } from "table";
+import Groupby from '../aggregators/groupby';
+import Dt from '../core/datetime';
 import DataFrame from '../core/frame';
 import Series from '../core/series';
 import Str from '../core/strings';
-import Dt from '../core/datetime';
-import { ParsingOptions, WritingOptions } from "xlsx";
 
 export type DTYPES = "float32" | "int32" | "string" | "boolean" | "undefined"
 
@@ -183,7 +181,6 @@ export interface SeriesInterface extends NDframeInterface {
     }): DataFrame
     iat(index: number): number | string | boolean | undefined
     at(index: string | number): number | string | boolean | undefined
-    plot(divId: string): IPlotlyLib
 }
 
 //Start of DataFrame class types
@@ -328,7 +325,6 @@ export interface DataFrameInterface extends NDframeInterface {
     }): DataFrame | void
     iat(row: number, column: number): number | string | boolean | undefined
     at(row: string | number, column: string): number | string | boolean | undefined
-    plot(divId: string): IPlotlyLib
 }
 
 export interface DateTime {
@@ -343,50 +339,11 @@ export interface DateTime {
     date(): Series
 }
 
-interface CustomConfig extends Config {
-    x: string
-    y: string,
-    values: string,
-    labels: string,
-    rowPositions: number[],
-    columnPositions: number[],
-    grid: { rows: number, columns: number },
-    tableHeaderStyle: any,
-    tableCellStyle: any,
-    columns: string[];
-}
-
-export type PlotConfigObject = {
-    config?: Partial<CustomConfig>
-    layout?: Partial<Layout>
-}
-
-export type InternalPlotConfigObject = {
-    config: Partial<CustomConfig>
-    layout: Partial<Layout>
-}
-
-export interface IPlotlyLib {
-    line(plotConfig?: PlotConfigObject): void
-    bar(plotConfig?: PlotConfigObject): void
-    scatter(plotConfig?: PlotConfigObject): void
-    hist(plotConfig?: PlotConfigObject): void
-    pie(plotConfig?: PlotConfigObject): void
-    box(plotConfig?: PlotConfigObject): void
-    violin(plotConfig?: PlotConfigObject): void
-    table(plotConfig?: PlotConfigObject): void
-}
 
 export interface CsvInputOptionsBrowser extends ParseConfig {
     frameConfig?: BaseDataOptionType
 }
-export type ExcelInputOptionsBrowser = {
-    sheet?: number,
-    method?: string,
-    headers?: any,
-    frameConfig?: BaseDataOptionType
-    parsingOptions?: ParsingOptions
-}
+
 export type JsonInputOptionsBrowser = {
     method?: string,
     headers?: any,
@@ -397,13 +354,6 @@ export interface CsvInputOptionsNode extends ParseConfig {
     frameConfig?: BaseDataOptionType
 }
 
-export type ExcelInputOptionsNode = {
-    sheet?: number,
-    method?: string,
-    headers?: HeadersInit
-    frameConfig?: BaseDataOptionType
-    parsingOptions?: ParsingOptions
-}
 export type JsonInputOptionsNode = {
     method?: string,
     headers?: HeadersInit
@@ -411,9 +361,7 @@ export type JsonInputOptionsNode = {
 }
 
 export type CsvOutputOptionsBrowser = { fileName?: string, sep?: string, header?: boolean, download?: boolean };
-export type ExcelOutputOptionsBrowser = { fileName?: string, sheetName?: string, writingOptions?: WritingOptions };
 export type JsonOutputOptionsBrowser = { fileName?: string, format?: "row" | "column", download?: boolean };
 
 export type CsvOutputOptionsNode = { filePath?: string, sep?: string, header?: boolean }
 export type JsonOutputOptionsNode = { format?: "row" | "column", filePath?: string }
-export type ExcelOutputOptionsNode = { filePath?: string, sheetName?: string, writingOptions?: WritingOptions }
