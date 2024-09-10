@@ -473,33 +473,6 @@ export default class NDframe implements NDframeInterface {
     }
 
     /**
-     * Converts a DataFrame or Series to Excel.
-     * @deprecated Use `toExcel` function directly instead.
-     * @example
-     * ```
-     * import * as dfd from "danfojs"
-     * const df = new dfd.DataFrame([[1, 2, 3], [4, 5, 6]])
-     * dfd.toExcel(df, {
-     *     filePath: "./data/sample.xlsx",
-     *     sheetName: "MySheet",
-     *   })
-     * ```
-     *
-     * @example
-     * ```
-     * import { toExcel } from "danfojs-node"
-     * const df = new DataFrame([[1, 2, 3], [4, 5, 6]])
-     * toExcel(df, {
-     *     filePath: "./data/sample.xlsx",
-     *     sheetName: "MySheet",
-     *   })
-     * ```
-     */
-    toExcel(options?: any): void {
-        throw new Error("Deprecated. Use `toExcel` function directly instead. e.g. `dfd.toExcel(df, {filePath: 'path/to/file.xlsx'})`")
-    }
-
-    /**
      * Pretty prints a DataFrame or Series to the console
      */
     print() {
