@@ -36,17 +36,17 @@ const utils = new Utils();
  * N-Dimension data structure. Stores multi-dimensional
  * data in a size-mutable, labeled data structure. Analogous to the Python Pandas DataFrame.
  *
- * @param  Object   
- * 
+ * @param  Object
+ *
  *  data:  1D or 2D Array, JSON, Tensor, Block of data.
- * 
+ *
  *  index: Array of numeric or string names for subseting array. If not specified, indexes are auto generated.
- * 
+ *
  *  columns: Array of column names. If not specified, column names are auto generated.
- * 
+ *
  *  dtypes: Array of data types for each the column. If not specified, dtypes inferred.
- * 
- *  config: General configuration object for NDframe      
+ *
+ *  config: General configuration object for NDframe
  *
  * @returns NDframe
  */
@@ -123,9 +123,9 @@ export default class NDframe implements NDframeInterface {
      * Internal function to format and load a Javascript object or object of arrays into NDFrame.
      * @param data Object or object of arrays.
      * @param type The type of the object. There are two recognized types:
-     * 
+     *
      * - type 1 object are in JSON format `[{a: 1, b: 2}, {a: 30, b: 20}]`.
-     * 
+     *
      * - type 2 object are of the form `{a: [1,2,3,4], b: [30,20, 30, 20}]}`
      * @param index Array of numeric or string names for subsetting array.
      * @param columns Array of column names.
@@ -135,7 +135,7 @@ export default class NDframe implements NDframeInterface {
         if (type === 1 && Array.isArray(data)) {
             const _data = (data).map((item) => {
                 return Object.values(item);
-            });
+            }) as ArrayType1D | ArrayType2D;
 
             let _columnNames;
 
@@ -236,7 +236,7 @@ export default class NDframe implements NDframeInterface {
     }
 
     /**
-     * Returns the axis labels of the NDFrame. 
+     * Returns the axis labels of the NDFrame.
     */
     get axis(): AxisType {
         return {
@@ -420,14 +420,14 @@ export default class NDframe implements NDframeInterface {
 
     /**
      * Returns the size of the NDFrame object
-     * 
+     *
     */
     get size(): number {
         return this.shape[0] * this.shape[1]
     }
 
     /**
-     * Converts a DataFrame or Series to CSV. 
+     * Converts a DataFrame or Series to CSV.
      * @deprecated Use `toCSV` function directly instead.
     * @example
     * ```
@@ -484,7 +484,7 @@ export default class NDframe implements NDframeInterface {
      *     sheetName: "MySheet",
      *   })
      * ```
-     * 
+     *
      * @example
      * ```
      * import { toExcel } from "danfojs-node"

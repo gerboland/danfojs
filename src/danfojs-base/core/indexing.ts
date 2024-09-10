@@ -22,7 +22,7 @@ const utils = new Utils();
 
 /**
 * Internal function to slice a Series/DataFrame by index based labels
-* @param Object 
+* @param Object
 */
 export function _iloc({ ndFrame, rows, columns }: {
     ndFrame: NDframeInterface
@@ -79,7 +79,7 @@ export function _iloc({ ndFrame, rows, columns }: {
     } else {
         const _formatedRows = []
         for (let i = 0; i < rows.length; i++) {
-            let _indexToUse = rows[i];
+            let _indexToUse = rows[i] as number;
             if (_indexToUse > ndFrame.shape[0]) {
                 throw new Error(`Invalid row parameter: Specified index ${_indexToUse} cannot be bigger than index length ${ndFrame.shape[0]}`);
             }
@@ -131,7 +131,7 @@ export function _iloc({ ndFrame, rows, columns }: {
     } else {
 
         for (let i = 0; i < columns.length; i++) {
-            const _indexToUse = columns[i];
+            const _indexToUse = columns[i] as number;
             if (_indexToUse > ndFrame.shape[1]) {
                 throw new Error(`Invalid column parameter: Specified index ${_indexToUse} cannot be bigger than index length ${ndFrame.shape[1]}`);
             }
@@ -207,7 +207,7 @@ export function _iloc({ ndFrame, rows, columns }: {
 
 /**
 * Internal function to slice a Series/DataFrame by specified string location based labels
-* @param Object 
+* @param Object
 */
 export function _loc({ ndFrame, rows, columns }: {
     ndFrame: NDframeInterface
@@ -327,7 +327,7 @@ export function _loc({ ndFrame, rows, columns }: {
             throw new Error(`ColumnIndexError: columns parameter must be an array of a string name. For example: columns: ["b"]`)
         }
 
-        if (columns[0].indexOf(":") == -1) { // Input type ==> ["A"] 
+        if (columns[0].indexOf(":") == -1) { // Input type ==> ["A"]
             _columnIndexes = [_columnNames.indexOf(columns[0])]
 
         } else { // Input type ==> ["a:b"] or [`"col1":"col5"`]
