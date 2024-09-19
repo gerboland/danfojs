@@ -11,6 +11,5 @@
         "build": "cd src/danfojs-node && yarn build:clean && cd ../danfojs-browser && yarn build:clean",
         "test": "cd src/danfojs-base && yarn && cd ../danfojs-node && yarn && yarn test:clean && cd ../danfojs-browser && yarn && yarn test:clean",
         "postinstall": "yarn run build"
-    },
-    "packageManager": "yarn@4.4.1"
+    }
 }
